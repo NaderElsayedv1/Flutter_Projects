@@ -1,14 +1,20 @@
 import 'package:flutter/material.dart';
 
-class SliderSection extends StatefulWidget {
-  const SliderSection({super.key});
+class HeightSection extends StatefulWidget {
+  final Function(double) onHeightChanged;
+  final double heightValue;
 
+  const HeightSection({
+    super.key,
+    required this.onHeightChanged,
+    required this.heightValue,
+  });
   @override
-  State<SliderSection> createState() => _SliderSectionState();
+  State<HeightSection> createState() => _HeightSectionState();
 }
 
-class _SliderSectionState extends State<SliderSection> {
-  double heightValue = 50;
+class _HeightSectionState extends State<HeightSection> {
+   double heightValue = 170;
 
   @override
   Widget build(BuildContext context) {
@@ -19,6 +25,7 @@ class _SliderSectionState extends State<SliderSection> {
       ),
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
+
         children: [
           Text(
             'HEIGHT',
@@ -27,7 +34,11 @@ class _SliderSectionState extends State<SliderSection> {
               fontSize: 18,
             ),
           ),
+
+          //height text
           Row(
+            crossAxisAlignment: CrossAxisAlignment.baseline,
+            textBaseline: TextBaseline.alphabetic,
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Text(
@@ -46,6 +57,7 @@ class _SliderSectionState extends State<SliderSection> {
                   fontSize: 18,
                 ),
               ),
+              //cm text
             ],
           ),
           Slider(
@@ -59,6 +71,7 @@ class _SliderSectionState extends State<SliderSection> {
               setState(() {
                 heightValue = newValue;
               });
+              widget.onHeightChanged(newValue);
             },
           ),
         ],
