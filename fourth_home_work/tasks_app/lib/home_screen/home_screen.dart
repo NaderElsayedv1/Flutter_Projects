@@ -33,7 +33,32 @@ class _HomeScreenState extends State<HomeScreen> {
         children: [
           Expanded(
             child: notesModel.isEmpty
-                ? Center(child: Text("No Tasks Yet 😴"))
+                ? Center(
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Icon(
+                          Icons.check_circle_outline_rounded,
+                          color: Color(0xffABCCCA),
+                          size: 100,
+                        ),
+                        Text(
+                          'No tasks yet',
+                          style: TextStyle(
+                            color: Color(0xffB5BBBB),
+                            fontSize: 20,
+                          ),
+                        ),
+                        Text(
+                          'Add a task to get started',
+                          style: TextStyle(
+                            color: Color(0xffB5BBBB),
+                            fontSize: 12,
+                          ),
+                        ),
+                      ],
+                    ),
+                  )
                 : ListView.builder(
                     itemCount: notesModel.tasks.length,
                     itemBuilder: (context, index) {

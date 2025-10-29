@@ -25,7 +25,6 @@ class _CustomCardState extends State<CustomCard> {
     return Padding(
       padding: const EdgeInsets.all(14),
       child: Card(
-        //margin: EdgeInsets.symmetric(vertical: 10),
         shadowColor: Colors.grey,
         child: ListTile(
           leading: Checkbox(
