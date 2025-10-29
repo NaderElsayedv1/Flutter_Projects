@@ -1,11 +1,13 @@
-import 'package:bmi_calculator/home_screen/age_section/custom_age_weight_container.dart';
+import 'package:bmi_calculator/components/custom_age_weight_container.dart';
+import 'package:bmi_calculator/models/bmi_inputs_model.dart';
 import 'package:flutter/material.dart';
 
 class AgeWeightSelection extends StatelessWidget {
-  const AgeWeightSelection({super.key, required this.onAgeChanged, required this.onWeightChanged});
-final Function(int) onAgeChanged;
-  final Function(int) onWeightChanged;
-
+  const AgeWeightSelection({
+    super.key,
+    required this.bmiInputsModel,
+  });
+  final BmiInputsModel bmiInputsModel;
   @override
   Widget build(BuildContext context) {
     return Row(
@@ -14,8 +16,9 @@ final Function(int) onAgeChanged;
           child: AgeWeightContainer(
             mainText: 'WEIGHT',
             initialValue: 60,
-                        onValueChanged: onWeightChanged,
-
+            onValueChanged: (valueNumber) {
+              bmiInputsModel.weight = valueNumber;
+            },
           ),
         ),
         SizedBox(
@@ -25,8 +28,9 @@ final Function(int) onAgeChanged;
           child: AgeWeightContainer(
             mainText: 'AGE',
             initialValue: 24,
-                        onValueChanged: onAgeChanged,
-
+            onValueChanged: (valueNumber) {
+              bmiInputsModel.age = valueNumber;
+            },
           ),
         ),
       ],

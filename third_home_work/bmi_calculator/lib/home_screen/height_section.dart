@@ -1,20 +1,18 @@
+import 'package:bmi_calculator/models/bmi_inputs_model.dart';
 import 'package:flutter/material.dart';
 
 class HeightSection extends StatefulWidget {
-  final Function(double) onHeightChanged;
-  final double heightValue;
-
   const HeightSection({
     super.key,
-    required this.onHeightChanged,
-    required this.heightValue,
+    required this.bmiInputsModel,
   });
+  final BmiInputsModel bmiInputsModel;
   @override
   State<HeightSection> createState() => _HeightSectionState();
 }
 
 class _HeightSectionState extends State<HeightSection> {
-   double heightValue = 170;
+  double heightValue = 170;
 
   @override
   Widget build(BuildContext context) {
@@ -67,11 +65,11 @@ class _HeightSectionState extends State<HeightSection> {
             activeColor: Colors.white,
             inactiveColor: Colors.grey,
             thumbColor: Color(0xffED0D54),
-            onChanged: (newValue) {
+            onChanged: (value) {
               setState(() {
-                heightValue = newValue;
+                heightValue = value;
+                widget.bmiInputsModel.height = heightValue;
               });
-              widget.onHeightChanged(newValue);
             },
           ),
         ],

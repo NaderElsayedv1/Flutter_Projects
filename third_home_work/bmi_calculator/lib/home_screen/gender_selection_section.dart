@@ -1,15 +1,13 @@
-import 'package:bmi_calculator/home_screen/gender_section/gender_container.dart';
+import 'package:bmi_calculator/components/gender_container.dart';
+import 'package:bmi_calculator/models/bmi_inputs_model.dart';
 import 'package:flutter/material.dart';
 
 class GenderSelection extends StatefulWidget {
   const GenderSelection({
     super.key,
-    required this.onGenderChanged,
-    required this.isMaleSelected,
+    required this.bmiInputsModel,
   });
-  final Function(bool) onGenderChanged;
-  final bool isMaleSelected;
-
+  final BmiInputsModel bmiInputsModel;
   @override
   State<GenderSelection> createState() => _GenderSelectionState();
 }
@@ -28,8 +26,8 @@ class _GenderSelectionState extends State<GenderSelection> {
             onTap: () {
               setState(() {
                 isMaleSelected = true;
+                widget.bmiInputsModel.gender = 'Male';
               });
-              widget.onGenderChanged(true);
             },
             child: GenderContainer(
               containerIcon: Icons.male_rounded,
@@ -46,8 +44,8 @@ class _GenderSelectionState extends State<GenderSelection> {
             onTap: () {
               setState(() {
                 isMaleSelected = false;
+                widget.bmiInputsModel.gender = 'Female';
               });
-              widget.onGenderChanged(false);
             },
             child: GenderContainer(
               containerIcon: Icons.female_rounded,

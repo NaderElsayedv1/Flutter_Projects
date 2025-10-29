@@ -3,12 +3,13 @@ import 'package:flutter/material.dart';
 class AgeWeightContainer extends StatefulWidget {
   const AgeWeightContainer({
     super.key,
-    required this.mainText, required this.initialValue, required this.onValueChanged,
+    required this.mainText,
+    required this.initialValue,
+    required this.onValueChanged,
   });
   final String mainText;
   final int initialValue;
-    final Function(int) onValueChanged;
-
+  final Function(int) onValueChanged;
 
   @override
   State<AgeWeightContainer> createState() => _AgeWeightContainerState();
@@ -16,17 +17,10 @@ class AgeWeightContainer extends StatefulWidget {
 
 class _AgeWeightContainerState extends State<AgeWeightContainer> {
   int valueNumber = 0;
-  void updateValue(int newValue) {
-    setState(() {
-      valueNumber = newValue;
-    });
-    widget.onValueChanged(newValue);
-  }
 
   @override
   Widget build(BuildContext context) {
-    if (valueNumber == 0)
-    {
+    if (valueNumber == 0) {
       valueNumber = widget.initialValue;
     }
     return Container(
@@ -60,6 +54,7 @@ class _AgeWeightContainerState extends State<AgeWeightContainer> {
                   setState(() {
                     if (valueNumber > 0) {
                       valueNumber--;
+                      widget.onValueChanged(valueNumber);
                     }
                   });
                 },
@@ -72,6 +67,7 @@ class _AgeWeightContainerState extends State<AgeWeightContainer> {
                 onTap: () {
                   setState(() {
                     valueNumber++;
+                    widget.onValueChanged(valueNumber);
                   });
                 },
                 child: CustomCircleAvatar(

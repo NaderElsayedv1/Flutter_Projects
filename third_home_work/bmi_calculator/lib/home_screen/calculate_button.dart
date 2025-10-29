@@ -1,45 +1,30 @@
-import 'package:bmi_calculator/result_screen/result_screen.dart';
+import 'package:bmi_calculator/models/bmi_inputs_model.dart';
 import 'package:flutter/material.dart';
+import 'package:bmi_calculator/result_screen/result_screen.dart';
 
+class CalculateButton extends StatelessWidget {
+  final BmiInputsModel bmiInputsModel; 
 
-class Calculate_button extends StatelessWidget {
-  final bool isMale;
-  final double heightValue;
-  final int weight;
-  final int age;
-
-  const Calculate_button({
-    super.key,
-    required this.isMale,
-    required this.heightValue,
-    required this.weight,
-    required this.age,
-  });
+  const CalculateButton({super.key, required this.bmiInputsModel, });
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        double bmi = weight / ((heightValue / 100) * (heightValue / 100));
         Navigator.push(
           context,
           MaterialPageRoute(
             builder: (context) => ResultScreen(
-              bmi: bmi,
-              isMale: isMale,
-              age: age,
+              bmiInputsModel: bmiInputsModel,
             ),
           ),
         );
       },
       child: Container(
-        width: double.infinity,
-        height: 70,
-        decoration: BoxDecoration(
-          color: const Color(0xffED0D54),
-          borderRadius: BorderRadius.circular(10),
-        ),
         alignment: Alignment.center,
+        height: 55,
+        width: double.infinity,
+        color: const Color(0xffED0D54),
         child: const Text(
           'CALCULATE',
           style: TextStyle(

@@ -1,65 +1,67 @@
+import 'package:bmi_calculator/models/bmi_inputs_model.dart';
 import 'package:flutter/material.dart';
 
 class ResultScreen extends StatelessWidget {
-  final double bmi;
-  final bool isMale;
-  final int age;
+  final BmiInputsModel bmiInputsModel;
 
   const ResultScreen({
     super.key,
-    required this.bmi,
-    required this.isMale,
-    required this.age,
+    required this.bmiInputsModel,
   });
-
-  String get resultText {
-    if (bmi < 18.5) return 'Underweight';
-    if (bmi < 25) return 'Normal';
-    if (bmi < 30) return 'Overweight';
-    return 'Obese';
-  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color.fromARGB(255, 7, 10, 44),
+      backgroundColor: const Color(0xff03051A),
       appBar: AppBar(
-        backgroundColor: const Color(0xff04061D),
-        title: const Text('BMI RESULT', style: TextStyle(color: Colors.white)),
+        backgroundColor: Color(0xff04061D),
+        title: const Text(
+          'Your Result',
+          style: TextStyle(
+            color: Colors.white,
+            fontSize: 20,
+            fontWeight: FontWeight.bold,
+          ),
+        ),
       ),
-
       body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Text(
-              isMale ? 'Gender: Male' : 'Gender: Female',
-              style: const TextStyle(color: Colors.grey, fontSize: 22),
-            ),
-            const SizedBox(height: 10),
-            Text(
-              'Age: $age',
-              style: const TextStyle(color: Colors.grey, fontSize: 22),
-            ),
-            const SizedBox(height: 20),
-            Text(
-              'BMI: ${bmi.toStringAsFixed(1)}',
-              style: const TextStyle(
-                color: Colors.white,
-                fontSize: 40,
-                fontWeight: FontWeight.bold,
+        child: Container(
+          padding: EdgeInsets.symmetric(horizontal: 30),
+          margin: EdgeInsets.symmetric(vertical: 50),
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(20),
+            color: Color(0xff17172F),
+          ),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Text(
+                'Gender: ${bmiInputsModel.gender}',
+                style: const TextStyle(color: Colors.white, fontSize: 24),
               ),
-            ),
-            const SizedBox(height: 20),
-            Text(
-              resultText,
-              style: const TextStyle(
-                color: Colors.pinkAccent,
-                fontSize: 30,
-                fontWeight: FontWeight.w600,
+              Text(
+                'Height: ${bmiInputsModel.height.toStringAsFixed(0)} cm',
+                style: const TextStyle(color: Colors.white, fontSize: 24),
               ),
-            ),
-          ],
+              Text(
+                'Weight: ${bmiInputsModel.weight} kg',
+                style: const TextStyle(color: Colors.white, fontSize: 24),
+              ),
+              Text(
+                'Age: ${bmiInputsModel.age}',
+                style: const TextStyle(color: Colors.white, fontSize: 24),
+              ),
+              const SizedBox(height: 20),
+              Text(
+                'Your BMI is: ${bmiInputsModel.bmiCaculate().toStringAsFixed(2)}',
+                style: const TextStyle(
+                  color: Colors.redAccent,
+                  fontSize: 30,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+            ],
+          ),
         ),
       ),
     );
